@@ -15,23 +15,26 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoanCalculatorController {
-
-	public void setData(LoanRepository data) {
-		this.data = data;
-	}
-
-	public void setMailSender(JavaMailSender mailSender) {
-		this.mailSender = mailSender;
-	}
-
 	@Autowired
 	private LoanRepository data;
 	
 	@Autowired
 	private JavaMailSender mailSender;
 
-	private RestTemplate restTemplate = new RestTemplate();
-	
+    private RestTemplate restTemplate = new RestTemplate();
+
+    public void setData(LoanRepository data) {
+        this.data = data;
+    }
+
+    public void setMailSender(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
 	// Render the form
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public ModelAndView renderNewLoanForm()
