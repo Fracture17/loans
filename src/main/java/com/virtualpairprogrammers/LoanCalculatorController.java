@@ -16,6 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoanCalculatorController {
 
+	public void setData(LoanRepository data) {
+		this.data = data;
+	}
+
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
 	@Autowired
 	private LoanRepository data;
 	
