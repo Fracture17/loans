@@ -55,7 +55,7 @@ public class RepaymentAmountTests {
 
         controller.processNewLoanApplication(loan);
 
-        assertEquals(new BigDecimal(100), loan.getRepayment());
+        assertEquals(new BigDecimal(110), loan.getRepayment());
     }
 
     @Test
