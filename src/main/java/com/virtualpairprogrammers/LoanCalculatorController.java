@@ -51,10 +51,12 @@ public class LoanCalculatorController {
 		URI location = restTemplate.postForLocation("http://loans.virtualpairprogrammers.com/loanApplication", loan); //this line sends the loan for approval request, which could take up to 24 hours
 		
 		BigDecimal applicableRate = loan.getInterestRate().divide(new BigDecimal("100"));
+		applicableRate = new BigDecimal(Double.parseDouble(applicableRate.toString()) * (loan.getTermInMonths() / 12));
 		applicableRate = applicableRate.add(new BigDecimal("1"));
 		
-		BigDecimal totalRepayable = new BigDecimal(loan.getPrincipal() * Double.parseDouble(applicableRate.toString()) * loan.getTermInMonths() / 12);
+		BigDecimal totalRepayable = new BigDecimal(loan.getPrincipal() * Double.parseDouble(applicableRate.toString()));
 		BigDecimal repayment = totalRepayable.divide(new BigDecimal("" + loan.getTermInMonths()),RoundingMode.UP);
+		repayment = repayment.setScale(0, RoundingMode.UP);
 		loan.setRepayment(repayment);
 		
 		SimpleMailMessage message = new SimpleMailMessage();
